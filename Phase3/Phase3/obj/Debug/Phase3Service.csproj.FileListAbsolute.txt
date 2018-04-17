@@ -1,0 +1,2 @@
+C:\Users\naths\Documents\GitHub\CSE-412\Phase3\Phase3\obj\Debug\Phase3Service.csprojResolveAssemblyReference.cache
+C:\Users\naths\Documents\GitHub\CSE-412\Phase3\Phase3\obj\Debug\Phase3Service.csproj.CoreCompileInputs.cache

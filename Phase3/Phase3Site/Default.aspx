@@ -18,12 +18,17 @@
     <script src="jquery-ui.js"></script>
     <link rel="stylesheet" href="jquery-ui.css"/>
     <script  type="text/javascript">
-    $(document).ready(function(){
-  $("#slider").slider(
+        $(document).ready(function () {
+            var min = 0.5;
+            var max = 5;
+            if ($('#<%= HiddenField1.ClientID %>')) min = $('#<%= HiddenField1.ClientID %>').val();
+            if ($('#<%= HiddenField2.ClientID %>')) max = $('#<%= HiddenField2.ClientID %>').val();
+
+            $("#slider").slider(
   {
     min:0.5,
         max: 5,
-        values: [0.5, 5],
+        values: [min, max],
         step: 0.5,
         range: true,
     slide:function(event,ui)
@@ -33,7 +38,10 @@
         $('#<%= HiddenField1.ClientID %>').val(ui.values[0]);
         $('#<%= HiddenField2.ClientID %>').val(ui.values[1]);
     }
-  });
+                });
+
+            $("#Label1").text($("#slider").slider("values", 0));
+            $("#Label2").text($("#slider").slider("values", 1));
 });
         </script>
     <form id="form1" runat="server">
@@ -43,20 +51,27 @@
             <br />
             &nbsp;&nbsp;
             Average Rating Filter:
-    <div id="slider"></div>
-            &nbsp;&nbsp;&nbsp;&nbsp; Min:<asp:Label ID="Label1" runat="server" Text="0.5"></asp:Label>
-&nbsp;&nbsp;&nbsp;&nbsp; Max:<asp:Label ID="Label2" runat="server" Text="5"></asp:Label>
+    <br /><br />
+            &nbsp;&nbsp;<asp:Label ID="Label1" runat="server" Text="0.5" Width="35px"></asp:Label>
+            <div style ="display: inline-block;" id="slider"></div>&nbsp;&nbsp;&nbsp;&nbsp;<asp:Label ID="Label2" runat="server" Text="5"></asp:Label>
             <br />
             <br />
-&nbsp; Title Filter:
+&nbsp;
+            <asp:Label ID="Label3" runat="server" Text="Title Filter:" Width="110px"></asp:Label>
+&nbsp;
             <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
             <br />
-&nbsp; Tag Filter:
+            <br />
+            &nbsp;
+            <asp:Label ID="Label4" runat="server" Text="Tag Filter:" Width="110px"></asp:Label>
+&nbsp;
             <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
             <br />
             <br />
             
             <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Submit" />
+            &nbsp;
+            <asp:Label ID="Label5" runat="server"></asp:Label>
             <br />
 
             <asp:Chart ID="Chart1" runat="server" Height="398px" Width="501px">
@@ -69,8 +84,6 @@
                     </asp:ChartArea>
                 </chartareas>
             </asp:Chart>
-            <br />
-            <br />
             <asp:Chart ID="Chart2" runat="server" Height="398px" Width="501px">
                 <series>
                     <asp:Series ChartType="Bar" Name="Series1">
